@@ -1,8 +1,6 @@
 package com.controle.caixa.caixa.exceptions.handle;
 
-import com.controle.caixa.caixa.exceptions.ExceptionResponse;
-import com.controle.caixa.caixa.exceptions.ResourceNotFoundException;
-import com.controle.caixa.caixa.exceptions.RouteNotFoundException;
+import com.controle.caixa.caixa.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -62,6 +60,34 @@ public class CustomizedResponseEntityExceptionHandle extends ResponseEntityExcep
 
         // retornar uma resposta com o status 404
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(InternalServerErrorException.class)
+    public final ResponseEntity<ExceptionResponse> handleInternalServerError(Exception ex, WebRequest request)
+    {
+        // cria uma instância de ExceptionResponse
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false)
+        );
+
+        // retornar uma resposta com o status 404
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(UnprocessableEntityException.class)
+    public final ResponseEntity<ExceptionResponse> handleUnprocessableEntityException(Exception ex, WebRequest request)
+    {
+        // cria uma instância de ExceptionResponse
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false)
+        );
+
+        // retornar uma resposta com o status 404
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
 }

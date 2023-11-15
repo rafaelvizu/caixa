@@ -26,7 +26,7 @@ public class UserController {
     }
 
 
-    // caso a rota não seja encontrada
+    // caso o usuário tente acessar uma rota que não existe
     @RequestMapping(value = "*")
     public void notFound()
     {
