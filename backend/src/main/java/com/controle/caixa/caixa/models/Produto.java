@@ -24,6 +24,5 @@ public class Produto implements Serializable {
     private String nome;
     private String unidade;
     private double valor;
-    private boolean ativo;
 
 }
