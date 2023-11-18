@@ -42,7 +42,7 @@ public class ProdutosController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Produto create(Produto produto)
+    public Produto create(@RequestBody Produto produto)
     throws InternalServerErrorException
     {
         if (!Validacoes.validarProduto(produto))
