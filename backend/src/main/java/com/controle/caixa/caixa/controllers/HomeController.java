@@ -1,4 +1,4 @@
-package com.controle.caixa.caixa.controller;
+package com.controle.caixa.caixa.controllers;
 
 import com.controle.caixa.caixa.exceptions.RouteNotFoundException;
 import org.springframework.web.bind.annotation.RequestMapping;

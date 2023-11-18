@@ -33,5 +33,9 @@ public class Venda implements Serializable {
     @Column(columnDefinition = "boolean default false")
     private boolean cancelada;
 
+    // para o relacionamento com a tabela de produtos vendidos
+    @OneToOne(mappedBy = "venda")
+    private ProdutoVendido produtoVendido;
+
 
 }

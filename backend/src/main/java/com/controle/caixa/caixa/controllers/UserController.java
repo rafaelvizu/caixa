@@ -1,6 +1,5 @@
-package com.controle.caixa.caixa.controller;
+package com.controle.caixa.caixa.controllers;
 
-import com.controle.caixa.caixa.exceptions.ResourceNotFoundException;
 import com.controle.caixa.caixa.exceptions.RouteNotFoundException;
 import com.controle.caixa.caixa.models.User;
 import com.controle.caixa.caixa.repositories.UserRepository;
