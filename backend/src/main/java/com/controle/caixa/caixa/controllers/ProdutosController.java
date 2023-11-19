@@ -76,14 +76,14 @@ public class ProdutosController {
     @RequestMapping(
             value = "/{id}",
             method = RequestMethod.DELETE,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void delete(@PathVariable(value = "id") long id)
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Produto delete(@PathVariable(value = "id") long id)
     throws InternalServerErrorException
     {
-        System.out.println("id: " + id);
-        //Produto produto = produtoRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-        ;//produtoRepository.delete(produto);
+        Produto produto = produtoRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        produtoRepository.delete(produto);
+
+        return produto;
     }
 
     // caso o usuário tente acessar uma rota que não existe

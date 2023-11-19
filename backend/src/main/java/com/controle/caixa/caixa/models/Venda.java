@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "vendas")
@@ -30,12 +32,20 @@ public class Venda implements Serializable {
 
     private double valorLiquido;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataVenda;
+
+    @PrePersist
+    public void onCreate() {
+        this.dataVenda = new Date();
+    }
+
     @Column(columnDefinition = "boolean default false")
     private boolean cancelada;
 
-    // para o relacionamento com a tabela de produtos vendidos
-    @OneToOne(mappedBy = "venda")
-    private ProdutoVendido produtoVendido;
+    // para cada venda, existem 1 ou mais produtos vendidos
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
+    private List<ProdutoVendido> produtosVendidos;
 
 
 }
