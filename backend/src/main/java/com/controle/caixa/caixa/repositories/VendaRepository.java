@@ -8,4 +8,7 @@ import java.math.BigInteger;
 
 @Repository
 public interface VendaRepository extends JpaRepository<Venda, Long> {
+    // ordenar por data de venda
+    @org.springframework.data.jpa.repository.Query(value = "SELECT * FROM vendas ORDER BY data_venda DESC", nativeQuery = true)
+    Iterable<Venda> findAllOrderByDataVendaDesc();
 }

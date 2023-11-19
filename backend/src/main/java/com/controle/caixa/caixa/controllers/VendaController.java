@@ -36,7 +36,8 @@ public class VendaController {
     public List<Venda> index()
     throws InternalServerErrorException
     {
-        return vendaRepository.findAll();
+        // ordenar por data de venda
+        return (List<Venda>) vendaRepository.findAllOrderByDataVendaDesc();
     }
 
     // mostrar uma venda

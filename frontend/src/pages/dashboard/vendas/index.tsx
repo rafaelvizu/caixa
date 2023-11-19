@@ -4,7 +4,6 @@ import {
   Table,
   Button,
   Modal,
-  Form,
   InputGroup,
   FormControl,
 } from "react-bootstrap";
@@ -25,13 +24,23 @@ const SalesScreen = () => {
   };
 
   useEffect(() => {
-    api
-      .get("/vendas")
-      .then((response) => {
-        setSales(response.data);
-        setFilteredSales(response.data);
-      })
-      .catch((error) => toast.error("Erro ao carregar vendas"));
+     // atualiza a lista de vendas a cada 5 segundos
+     function getData()
+     {
+          api
+          .get("/vendas")
+          .then((response) => {
+               setSales(response.data);
+          })
+          .catch((error) => toast.error("Erro ao buscar vendas"));
+     }
+
+     getData();
+     const interval = setInterval(() => {
+          getData();
+
+     }, 10000);
+     return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -66,17 +75,6 @@ const SalesScreen = () => {
 
   return (
     <div className="container p-4">
-      <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon1">Pesquisar</InputGroup.Text>
-        <FormControl
-          placeholder="Nome do produto"
-          aria-label="Search"
-          aria-describedby="basic-addon1"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </InputGroup>
-
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -92,8 +90,8 @@ const SalesScreen = () => {
           {filteredSales.map((sale) => (
             <tr key={sale.id}>
               <td>{sale.id}</td>
-              <td>{sale.valorBruto}</td>
-              <td>{sale.valorLiquido}</td>
+              <td>R$ {sale.valorBruto}</td>
+              <td>R$ {sale.valorLiquido}</td>
               <td>{sale.cancelada ? "Sim" : "Não"}</td>
               <td>{new Date(sale.dataVenda).toLocaleDateString()}</td>
               <td>
@@ -132,7 +130,7 @@ const SalesScreen = () => {
                 </p>
                 <p>
                   <strong>Valor: </strong>
-                  {product.valorUnitario}
+                  R$ {product.valorUnitario}
                 </p>
                 <p>
                   <strong>Quantidade: </strong>
@@ -140,8 +138,12 @@ const SalesScreen = () => {
                 </p>
                 <p>
                     <strong>Valor Total: </strong>
-                    {product.valorTotal}
-                    </p>
+                    R$ {product.valorTotal}
+                </p>
+                <p>
+                  <strong>Unidade: </strong>
+                  {product.unidade}
+                </p>
                 <hr className="my-4"/>
               </div>
             ))}
@@ -152,8 +154,6 @@ const SalesScreen = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      <ToastContainer />
     </div>
   );
 };

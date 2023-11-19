@@ -219,7 +219,7 @@ const Table = () => {
                 onChange={(e) => setValor(Number(e.target.value))}
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" className="mt-4">
               Salvar
             </Button>
           </Form>
@@ -347,6 +347,7 @@ function Produtos() : React.ReactElement
             type="number"
             placeholder="Digite o valor do produto"
             value={valor}
+            step="0.01"
             onChange={(e) => setValor(Number(e.target.value))}
           />
         </Form.Group>

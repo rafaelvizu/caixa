@@ -40,6 +40,12 @@ public class Venda implements Serializable {
         this.dataVenda = new Date();
     }
 
+    // ordenar por data de venda
+    @OrderBy("dataVenda DESC")
+    public static List<Venda> findAllByOrderByDataVendaDesc() {
+        return null;
+    }
+
     @Column(columnDefinition = "boolean default false")
     private boolean cancelada;
 
